@@ -27,9 +27,32 @@ export default function RegisterCriptos() {
     return (
         <View style={styles.container}>
             <View style={styles.container}>
-                <Text style={styles.title}>Register Cripto</Text>
+                <Text style={styles.title}>Registrar Criptomoeda</Text>
             </View>
-            <TextInput></TextInput>
+            <TextInput 
+                autoCapitalize="words" 
+                placeholder="Digite a criptomoeda"
+                onChangeText={setNameCripto}
+                value={nameCripto}
+            />
+            <TextInput  
+                placeholder="Digite a sigla"
+                onChangeText={setAcronymCripto}
+                value={acronymCripto}
+            />
+            <TextInput  
+                placeholder="Digite a valor"
+                onChangeText={setValueCripto}
+                value={valueCripto}
+            />
+
+            <TouchableOpacity 
+                onPress={() => {
+                    addCripto()
+                }}
+            >
+                <Text>Enviar</Text>
+            </TouchableOpacity>
         </View>
     )
 }
