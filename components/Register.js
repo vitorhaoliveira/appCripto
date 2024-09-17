@@ -3,56 +3,94 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert } from "reac
 import { firestore } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
-export default function RegisterCriptos() {
-    const [nameCripto, setNameCripto] = useState(null);
-    const [acronymCripto, setAcronymCripto] = useState(null);
-    const [valueCripto, setValueCripto] = useState(null);
+export default function RegisterCriptos({ navigation }) {
+    const [nameCripto, setNameCripto] = useState("");
+    const [acronymCripto, setAcronymCripto] = useState("");
+    const [valueCripto, setValueCripto] = useState("");
 
     async function addCripto() {
         try {
-            const docRef = addDoc(collection(firestore, "tbcoin"), {
+            const docRef = await addDoc(collection(firestore, "tbcoin"), {
                 nameCripto: nameCripto, 
                 acronymCripto: acronymCripto, 
                 valueCripto: valueCripto
             });
             console.log("Document registered with ID: ", docRef.id);
-            Alert.alert("Register", "Records successfully registered");
-            NavigationPreloadManager.navigate("Home");
+            Alert.alert("Register", "Record successfully registered");
+            navigation.navigate("Home");
         } catch (error) {
-            console.error("Error to register cripto: ", error);
-            Alert.alert("Error", "Error to register")
+            console.error("Error registering cripto: ", error);
+            Alert.alert("Error", "Failed to register cripto");
         }
     }
 
     return (
         <View style={styles.container}>
-            <View style={styles.container}>
-                <Text style={styles.title}>Registrar Criptomoeda</Text>
-            </View>
+            <Text style={styles.title}>Registrar Criptomoeda</Text>
             <TextInput 
-                autoCapitalize="words" 
+                style={styles.input}
+                autoCapitalize="words"
                 placeholder="Digite a criptomoeda"
                 onChangeText={setNameCripto}
                 value={nameCripto}
             />
-            <TextInput  
+            <TextInput
+                style={styles.input}
+                autoCapitalize="characters"
                 placeholder="Digite a sigla"
                 onChangeText={setAcronymCripto}
                 value={acronymCripto}
             />
-            <TextInput  
-                placeholder="Digite a valor"
+            <TextInput
+                style={styles.input}  
+                keyboardType='numeric'
+                placeholder="Digite o valor"
                 onChangeText={setValueCripto}
                 value={valueCripto}
             />
 
             <TouchableOpacity 
-                onPress={() => {
-                    addCripto()
-                }}
+                style={styles.sendButton}
+                onPress={addCripto}
             >
-                <Text>Enviar</Text>
+                <Text style={styles.sendButtonText}>Enviar</Text>
             </TouchableOpacity>
         </View>
-    )
+    );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 16,
+    },
+    title: {
+        fontSize: 25,
+        marginVertical: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    input: {
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        marginVertical: 10,
+        marginHorizontal: 10,
+        fontSize: 15,
+        backgroundColor: '#e0e0e0',
+        borderRadius: 10,
+        width: '90%',
+    },
+    sendButton: {
+        marginTop: 20,
+        backgroundColor: '#007BFF',
+        padding: 10,
+        borderRadius: 5,
+    },
+    sendButtonText: {
+        fontSize: 20,
+        textAlign: 'center',
+        color: '#FFFFFF',
+    },
+});

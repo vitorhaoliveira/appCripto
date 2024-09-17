@@ -1,12 +1,12 @@
-import { React } from "react";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home } from "../components/Home";
-import { Register } from "../components/Register";
-import { Change } from "../components/Change";
+import Home from "../components/Home";
+import Register from "../components/Register";
+import Change from "../components/Change";  
 
 const Stack = createStackNavigator();
 
-export default function Routes() {
+function Routes() {
     return (
         <Stack.Navigator>
             <Stack.Screen 
@@ -24,3 +24,5 @@ export default function Routes() {
         </Stack.Navigator>
     );
 }
+
+export default Routes;
