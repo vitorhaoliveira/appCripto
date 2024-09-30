@@ -28,30 +28,16 @@ export default function ChangeCriptos({ navigation, route }) {
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.tittle}>Alterar dados da Criptomoeda</Text>
+                <Text style={styles.tittle}>Alterar tarefa</Text>
             </View>
 
             <View>
                 <TextInput 
                     style={styles.input}
                     autoCapitalize="words"
-                    placeholder="Digite a criptomoeda"
+                    placeholder="Digite a tarefa"
                     onChangeText={(text) => setNameCripto(text)}
                     value={nameCripto}
-                />
-                <TextInput 
-                    style={styles.input}
-                    autoCapitalize="characters"
-                    placeholder="Digite a saída"
-                    onChangeText={(text) => setAcronymCripto(text)}
-                    value={acronymCripto}
-                />
-                <TextInput 
-                    style={styles.input}
-                    keyboardType="numeric"
-                    placeholder="Digite a valor"
-                    onChangeText={(text) => setValueCripto(text)}
-                    value={valueCripto}
                 />
                 <TouchableOpacity 
                     style={styles.sendButton}

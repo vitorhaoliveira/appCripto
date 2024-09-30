@@ -34,7 +34,7 @@ export default function Home({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Lista de Criptomoedas</Text>
+            <Text style={styles.title}>To do list</Text>
 
             <FlatList
                 data={criptos}
@@ -49,9 +49,7 @@ export default function Home({ navigation }) {
                                 valueCripto: item.valueCripto
                             })}
                         >
-                            <Text>Criptomoeda: {item.nameCripto}</Text>
-                            <Text>Sigla: {item.acronymCripto}</Text>
-                            <Text>Valor: {item.valueCripto}</Text>
+                            <Text>Tarefa: {item.nameCripto}</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
@@ -79,7 +77,7 @@ export default function Home({ navigation }) {
                     </View>
                 )}
                 keyExtractor={(item) => item.id}
-                ListEmptyComponent={<Text style={styles.emptyText}>Nenhuma cripto encontrada</Text>}
+                ListEmptyComponent={<Text style={styles.emptyText}>Nenhuma tarefa encontrada</Text>}
             />
 
             <TouchableOpacity
