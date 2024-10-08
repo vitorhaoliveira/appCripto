@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { Alert, TouchableOpacity, View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
+import { Firebase } from '../firebase'
 
 function Login({ navigation }) {
     const [email, setEmail] = useState('');
@@ -14,7 +15,18 @@ function Login({ navigation }) {
     }
 
     function logIn() {
-        
+        Firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(() => {
+                if (user) {
+                    Alert('Usuario não encontrado');
+                    return;
+                }
+                navigation.navigate('Routes', {email})
+            })  
+            .catch((error) => {
+                Alert(error);
+                navigation.navigate('Login')
+            })
     }
 
     return (
